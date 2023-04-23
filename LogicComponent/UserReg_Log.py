@@ -28,7 +28,9 @@ def ReturnUser(email,password):
         user = Session.query(UserRegDM).filter(UserRegDM.email==email).first()
         if verify_password(password,user.password_salt,user.password):
             UserDet = Session.query(User).filter(User.UserId == user.SysId).first()
-            return {'Success':user.SysId,'Details':to_json(UserDet)}
+            if(UserDet is not None):
+                return {'Success':user.SysId,'Details':to_json(UserDet)}
+            return {'Success': 'failed' }
         else:
             return {'Success':'false'}
 def CreateUser(email,password):
