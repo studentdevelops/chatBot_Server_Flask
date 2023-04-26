@@ -16,9 +16,9 @@ app = Flask(__name__)
 
 @app.route('/post_data', methods=['POST'])
 def post_data():
-    print('Call HEre')
+    # print('Call HEre')
     data = request.get_json(force=True)
-    print(data)
+    # print(data)
     try:
         df = pd.DataFrame(data, index=[0])
         df1 = df
@@ -26,7 +26,7 @@ def post_data():
         df1.set_index(pd.Index(usysid, name='SysId'), inplace=True)
         df1.to_sql("users", con=eng, if_exists='append', chunksize=50)
         df = df.drop(['UserId', 'name', 'height',
-                     'weight', 'surgery', 'bmr'], axis=1)
+                     'weight', 'surgery','bmr'], axis=1)
         userId = data['UserId']
         x = Predict(df)
         up = text(f"update users set medical_assistance='{x[0]}' where 'UserId'='{userId}'".strip())
@@ -49,7 +49,7 @@ def Get_Answer():
         Question = data['Question']
         UserId = data['UserId']
         status, answer = GetAnswer(Question=Question, UserId=UserId)
-        print(status,answer)
+        # print(status,answer)
         return {'success': status, 'message': answer}
     except Exception as e:
         print(e)
@@ -61,7 +61,7 @@ def Get_Answer():
 @app.route('/Create_User', methods=['POST'])
 def Create_User():
     data = request.get_json(force=True)
-    print(data)
+    # print(data)
     try:
         email = data['email']
         password = data['password']
