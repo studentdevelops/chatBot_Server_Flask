@@ -2,11 +2,11 @@
 from LogicComponent.AppHelper import Api_key as Api
 from LogicComponent.AppHelper import Session as Sess
 import openai
+import uuid
 
 from DataModels.UserHistoryDM import UserChatHistoryDM
 
 # Load your API key from an environment variable or secret management service
-# openai.api_key = "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"
 # Question = "What is Current time of Dubai?"
 # UserId = '9a11d78e-899a-4299-98b4-eaeb86498a46'
 def GetAnswer(Question,UserId):
@@ -24,6 +24,7 @@ def GetAnswer(Question,UserId):
     )
     answer = response.choices[0].text
     data =  UserChatHistoryDM(
+                SysId = str(uuid.uuid4()),
                 Question=Question,
                 Answer=answer,
                 UserId = UserId
