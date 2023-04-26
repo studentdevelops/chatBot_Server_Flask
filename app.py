@@ -45,7 +45,7 @@ def post_data():
 @app.route('/Get_Answer', methods=['POST'])
 def Get_Answer():
     data = request.get_json(force=True)
-    print(data)
+    # print(data)
     try:
         Question = data['Question']
         UserId = data['UserId']

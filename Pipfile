@@ -13,6 +13,7 @@ psycopg2 = "*"
 scikit-learn = "*"
 python-dotenv = "*"
 gunicorn = "*"
+pip = "*"
 
 [dev-packages]
 

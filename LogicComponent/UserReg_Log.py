@@ -36,7 +36,7 @@ def ReturnUser(email,password):
 def CreateUser(email,password):
     if not CheckUser(email):
         s,hashpassowrd=hash_password(password)
-        print(s)
+        # print(s)
         sysid=str(uuid.uuid4())
         user = UserRegDM(SysId=sysid,email=email,password=bytes(hashpassowrd,'utf-8'),password_salt=s)
         Session.add(user)
