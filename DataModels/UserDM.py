@@ -8,7 +8,7 @@ from sqlalchemy.orm import relationship, backref
 class User(BaseDM):
     __tablename__ = 'users'
     name = Column(String(255), nullable=False)
-    age = Column(Integer, nullable=False)
+    Age = Column(Integer, nullable=False)
     gender = Column(Integer, nullable=False)
     height = Column(Float, nullable=False)
     weight = Column(Float, nullable=False)
@@ -27,5 +27,6 @@ class User(BaseDM):
     mi = Column(Text, nullable=True)
     ailment = Column(Text, nullable=True)
     surgery = Column(Integer,nullable=True)
+    medical_assistance = Column(Integer, nullable=True)
     UserId = Column(String(36), ForeignKey(UserRegDM.SysId), nullable=False)
     User = relationship(UserRegDM, backref=backref("UserReg"))

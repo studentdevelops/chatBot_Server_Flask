@@ -29,10 +29,10 @@ def ReturnUser(email,password):
         if verify_password(password,user.password_salt,user.password):
             UserDet = Session.query(User).filter(User.UserId == user.SysId).first()
             if(UserDet is not None):
-                return {'Success':user.SysId,'Details':to_json(UserDet)}
-            return {'Success': 'failed' }
+                return {'success':user.SysId,'Details':to_json(UserDet)}
+            return {'success': 'failed' }
         else:
-            return {'Success':'false'}
+            return {'success':'false'}
 def CreateUser(email,password):
     if not CheckUser(email):
         s,hashpassowrd=hash_password(password)
@@ -41,7 +41,7 @@ def CreateUser(email,password):
         user = UserRegDM(SysId=sysid,email=email,password=bytes(hashpassowrd,'utf-8'),password_salt=s)
         Session.add(user)
         Session.commit()
-        return {'Success': 'true','UserId':sysid}
+        return {'success': 'true','UserId':sysid}
     else:
         return {'Error':'Inavild Email Or User Exists'}
 def hash_password(password, salt=None):

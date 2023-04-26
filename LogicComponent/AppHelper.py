@@ -10,9 +10,10 @@ from sqlalchemy import create_engine
 
 # engine = create_engine('mssql+pyodbc://' + 'LAPTOP-LC07V53A/CPING?' + 'driver=SQL+Server+Native+Client+11.0')
 # engine = create_engine('sqlite:///Database/Test.db', echo=True)
+
 engine = create_engine("postgresql://postgres:123@localhost:5432/test", echo=False )
 connect = engine.connect()
 Base.metadata.create_all(engine)
 Session = sessionmaker(bind=engine)
 Session = Session()
-Api_key = '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'
+Api_key = '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'
