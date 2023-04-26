@@ -25,10 +25,14 @@ def post_data():
         usysid = [str(uuid.uuid4()) for _ in range(len(df1))]
         df1.set_index(pd.Index(usysid, name='SysId'), inplace=True)
         df1.to_sql("users", con=eng, if_exists='append', chunksize=50)
+        # print("sql done")
         df = df.drop(['UserId', 'name', 'height',
                      'weight', 'surgery','bmr'], axis=1)
+        # print("drop done")
         userId = data['UserId']
+        # print("UserId fetched")
         x = Predict(df)
+        # print("pridicted", str(x[0]))
         up = text(f"update users set medical_assistance='{x[0]}' where 'UserId'='{userId}'".strip())
         Sess.execute(up)
         Sess.commit()
@@ -37,6 +41,7 @@ def post_data():
         else:
             return {'success': True, 'output': 0}
     except Exception as e:
+        print("here" , e)
         return {'success': False, "exception": str(e)}
     finally:
         Sess.close()
